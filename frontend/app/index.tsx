@@ -2,7 +2,6 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
@@ -20,7 +19,6 @@ import SettingsScreen from './settings';
 import { AuthProvider, useAuth } from '../contexts/AuthContext';
 
 const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
 
 // Main Tab Navigator
 function MainTabs() {
@@ -85,15 +83,11 @@ function AppNavigator() {
     );
   }
 
-  return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {isAuthenticated ? (
-        <Stack.Screen name="Main" component={MainTabs} />
-      ) : (
-        <Stack.Screen name="Auth" component={AuthScreen} />
-      )}
-    </Stack.Navigator>
-  );
+  if (isAuthenticated) {
+    return <MainTabs />;
+  } else {
+    return <AuthScreen />;
+  }
 }
 
 export default function App() {
