@@ -1,7 +1,5 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
@@ -17,6 +15,9 @@ import SettingsScreen from './settings';
 
 // Auth context
 import { AuthProvider, useAuth } from '../contexts/AuthContext';
+
+// Tab Navigator
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
 
@@ -96,9 +97,7 @@ export default function App() {
       <AuthProvider>
         <View style={styles.container}>
           <StatusBar style="light" backgroundColor="#000000" />
-          <NavigationContainer>
-            <AppNavigator />
-          </NavigationContainer>
+          <AppNavigator />
         </View>
       </AuthProvider>
     </SafeAreaProvider>
